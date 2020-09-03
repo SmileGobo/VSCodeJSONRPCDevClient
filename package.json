@@ -22,7 +22,7 @@
 		]
 	},
 	"scripts": {
-		"test": "node ./test/runTest.js"
+		"test": "mocha"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
@@ -31,12 +31,16 @@
 		"@types/vscode": "^1.48.0",
 		"eslint": "^5.13.0",
 		"glob": "^7.1.4",
-		"mocha": "^6.1.4",
+		"mocha": "^6.2.3",
 		"typescript": "^3.3.1",
 		"vscode-test": "^1.0.2"
 	},
 	"dependencies": {
+		"module-alias": "^2.2.2",
 		"xmldom": "^0.3.0",
 		"xpath": "0.0.29"
+	},
+	"mocha": {
+		"ui": "tdd"
 	}
 }
