@@ -1,0 +1,54 @@
+<html>
+    <head>
+    <style>
+        .config-form > label {
+            border: 1px solid black;
+            display: table-cell;
+        }
+    </style>
+</head>
+    <body>
+    <div id="config">
+    <h1>CONFIG</h1>
+    <form class="config-form" style="width: 30vw;">
+    <label>  
+    протокол
+    <select disabled="">
+        <option selected="">TCP</option>
+        <option>WS</option>
+    </select>
+
+    </label>
+    <label>
+        хост
+        <input type="text" name="host">
+    </label>
+    <label>
+        порт
+        <input type="text" name="port">
+    </label>
+    <label id="session" hidden="">
+        сессия(для TCP)
+        <input type="text" name="session">
+    </label>
+    <input name="connect" type="button" value="connect" style="
+    display: inline-block;
+    width: 45vw;
+">
+    </form>
+</div>
+<div id="log">
+    <h1>LOG</h1>
+    <form id="communication">
+        <h2>Обмены</h2>
+        <textarea name="communication" readonly="" style="margin: 0px; height: 161px; width: 586px; display: inline-block;"></textarea>
+        <input type="button" value="очистить" name="clear" style="display: inline-block;">
+    </form>
+    <form>
+        <h2>Уведомления</h2>
+        <textarea name="notification" readonly="" style="margin: 0px; width: 405px; height: 124px;"></textarea>
+        <input type="button" value="очистить" name="clear">
+    </form>
+    
+</div>
+</body></html>
