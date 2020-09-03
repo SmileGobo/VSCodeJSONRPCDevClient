@@ -1,3 +1,4 @@
 .vscode
 *.vscodeignore
 *.eslintrc.json
+node_modules
