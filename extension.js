@@ -1,10 +1,13 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+require('module-alias/register');
+
 const vscode = require('vscode');
 const fs     = require('fs');
 const path 	 = require('path');
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+
+const ResourcePather  = require('@core/ResourcePather');
+
 
 /**
  * @param {vscode.ExtensionContext} context
