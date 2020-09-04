@@ -1,7 +1,7 @@
 assert = require('assert');
 
 suite('check', () => {
-    test('should return -1 when the value is not present', function () {
+    test('simple test lib check', function () {
         assert.equal([1, 2, 3].indexOf(4), -1);
     });
 });
