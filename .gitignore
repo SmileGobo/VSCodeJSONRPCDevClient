@@ -2,3 +2,4 @@
 *.vscodeignore
 *.eslintrc.json
 node_modules
+/jsconfig.json
