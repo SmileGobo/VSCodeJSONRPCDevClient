@@ -37,20 +37,14 @@ function activate(context) {
 				]
 			} // W
 		);
-		/*let rp = new ResourcePather();
+		let rp = new ResourcePather();
 		rp.basePath = ui_root;
 		rp.html     = loadUI(ui_root);
 		rp.fixResourceReferences();
-		rp.injectCSPSource();
-		panel.webview.html = rp.html; */
+		//rp.injectCSPSource();
+		panel.webview.html = rp.html;
 		//panel.webview.html = `<textarea>${rp.html}</textarea>`;
 
-		let html = loadUI(ui_root);
-		panel.webview.cspSource = ui_root;
-		html = fixResourceReferences(html, ui_root, panel.webview);
-		//html = fixCspSourceReferences(html, panel.webview);
-		panel.webview.html = `<textarea>${html}</textarea>`;
-		//panel.webview.html = html;
 	});
 
 	context.subscriptions.push(disposable);
