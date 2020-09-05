@@ -36,7 +36,6 @@
 		"vscode-test": "^1.0.2"
 	},
 	"dependencies": {
-		"module-alias": "^2.2.2",
 		"xmldom": "^0.3.0",
 		"xpath": "0.0.29"
 	},
