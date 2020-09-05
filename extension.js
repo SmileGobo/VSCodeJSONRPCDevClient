@@ -1,12 +1,11 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-require('module-alias/register');
 
 const vscode = require('vscode');
 const fs     = require('fs');
 const path 	 = require('path');
 
-const ResourcePather  = require('@core/ResourcePather');
+const ResourcePather  = require('./core/ResourcePather');
 
 
 /**
@@ -38,10 +37,20 @@ function activate(context) {
 				]
 			} // W
 		);
+		/*let rp = new ResourcePather();
+		rp.basePath = ui_root;
+		rp.html     = loadUI(ui_root);
+		rp.fixResourceReferences();
+		rp.injectCSPSource();
+		panel.webview.html = rp.html; */
+		//panel.webview.html = `<textarea>${rp.html}</textarea>`;
+
 		let html = loadUI(ui_root);
-		html = fixCspSourceReferences(html, panel.webview);
+		panel.webview.cspSource = ui_root;
 		html = fixResourceReferences(html, ui_root, panel.webview);
-		panel.webview.html = html; //`<textarea>${html}</textarea>`;
+		//html = fixCspSourceReferences(html, panel.webview);
+		panel.webview.html = `<textarea>${html}</textarea>`;
+		//panel.webview.html = html;
 	});
 
 	context.subscriptions.push(disposable);
