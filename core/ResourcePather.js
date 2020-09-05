@@ -2,7 +2,7 @@ const XPATH  = require('xpath');
 const path   = require('path');
 const xmldom = require('xmldom');
 const ASS    = require('assert'); 
-const { assert } = require('console');
+
 module.exports =  class {
     //TODO ResourceLocator
     //addFilter({tag, attr});
@@ -29,41 +29,57 @@ module.exports =  class {
 	}
 
 	_base_path = '';
-    _html_doc = null;
-    _parser   = new xmldom.DOMParser({
+    _html_doc  = null;
+    //костыль благодоря котрому можно делать запросы  вида
+    // '//x:<tag>...'
+    //https://stackoverflow.com/questions/25753368/performant-parsing-of-pages-with-node-js-and-xpath
+    _select    = XPATH.useNamespaces({"x": "http://www.w3.org/1999/xhtml"});
+    _parser    = new xmldom.DOMParser({
         errorHandler: (_, msg) => {
             this._html_doc = null;
             throw msg;
         }
     });
-    
-    fixResourceReferences() {
+    _checkState() {
         ASS.notEqual(this._html_doc, null, 'html not setup');
         ASS.notEqual(this._base_path, '', 'basePath not setup');
+    }
+    fixResourceReferences() {
+        this._checkState();
 
         const rqsts = [
             {tag: 'link',   attr: 'href'},
             {tag: 'script', attr: 'src'}
         ];
-        //костыль благодоря котрому можно делать запросы  вида
-        // '//x:<tag>...'
-        //https://stackoverflow.com/questions/25753368/performant-parsing-of-pages-with-node-js-and-xpath
-        const select = XPATH.useNamespaces({"x": "http://www.w3.org/1999/xhtml"});
+        
         rqsts.forEach(rqst => {
             let xpath = `//x:${rqst.tag}[@${rqst.attr}]`;
-            let nodes = select(xpath, this._html_doc);
+            let nodes = this._select(xpath, this._html_doc);
             nodes.forEach( node => {
-                const type = node.getAttribute('rel') ?? '';
+                const type = node.getAttribute('rel') || '';
                 if (type === 'import' ){
                     //TODO вгрузку веб компонентов
                     return; 
                 }
                 let link_path = node.getAttribute(rqst.attr);
                 //TODO скорректировать под винду
-                link_path = `vscode-resource:/${path.join(this._base_path, link_path)}`;
+                link_path = `vscode-resource:${path.join(this._base_path, link_path)}`;
                 node.setAttribute(rqst.attr, link_path);
             });
         });
     }
+    injectCSPSource() {
+        this._checkState();
+        //<meta http-equiv="Content-Security-Policy" 
+        //content="default-src 'none'; img-src ${csp_src}; script-src ${csp_src}; style-src ${csp_src}; "/>
+        
+        let head = this._html_doc.getElementsByTagName('head')[0];
+        let meta = this._html_doc.createElement('meta');
+        const csp_src = this._base_path;
+        let content = `default-src 'none'; img-src ${csp_src}; script-src ${csp_src}; style-src ${csp_src};`
+        meta.setAttribute('http-equiv', 'Content-Security-Policy');
+        meta.setAttribute('content', content);
+        head.appendChild(meta);
+    }   
 }
 
