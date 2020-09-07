@@ -1,14 +1,26 @@
 <html>
     <head> 
         <meta charset="UTF-8">
-
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource:; style-src vscode-resource:; "/>
+        <!-- Такой схемой мы разрешаем применение стилей-->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource:; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./main.css">
         <script type="module" src="./test.js"></script>
+        <script type="module" src="components/x-counter.js"></script>
     </head>
     <body>
         <h1>Suprise! Mother fucker!</h1>
-        
+        <template id="x-counter">
+            <style>
+                button,p {
+                    display: inline-block;
+                }
+            </style>
+            <button aria-label="decrement">-</button>
+                <p>0</p>
+            <button aria-label="increment">+</button>
+        </template>
+
+        <x-counter />
     </body>
 </html>
