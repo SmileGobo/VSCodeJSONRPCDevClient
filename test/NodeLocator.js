@@ -19,7 +19,7 @@ suite('NodeLocator', () => {
         assert.equal(rslt[0].tagName, 'head');
 
         rslt = node_locator.execXPath('/html:html/html:body');
-        assert.ok(rslt.length >= 1);
+        assert.ok(rslt.length >= 1); //почему-то два раза узел вернул
         assert.equal(rslt[0].tagName, 'body');
 
     });
