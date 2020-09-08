@@ -1,3 +1,51 @@
+const vscode = require('vscode');
+const URIBuilder = require('./core/URIBuilder');
+class RPCTester {
+    _panel = null;
+    _uri   = new URIBuilder()
+    _count = 0;
+    activate(context){
+        this._uri.basePath = context.extensionPath;
+
+        let disposable = vscode.commands.registerCommand(
+            'extension.helloWorld', 
+            this._onActivate.bind(this)
+        );
+        context.subscriptions.push(disposable);
+    }
+    deactivate() {
+        this._panel.dispose();
+    }
+    _onActivate() {
+        console.log('Plugin activated');
+        this._createPanel();
+        this._count++;
+        this._panel.webview.html = `<h1> hello!${this._count}</h1>`;
+    }
+
+    _createPanel(){
+        //надо корректно очищать панель
+        if (!Object.is(this._panel, null)){
+            this._panel.dispose();
+        }
+        // но при повторном вызове надо как-то туже панель использовать?
+        this._panel = vscode.window.createWebviewPanel(
+			'JSONRPCTester', // Identifies the type of the webview. Used internally
+			'JSONRPC Tester', // Title of the panel displayed to the user
+			vscode.ViewColumn.Two, // Editor column to show the new webview panel in.
+			{
+				enableScripts: true,
+				localResourceRoots: [
+					vscode.Uri.file(this._uri.make('UI'))
+				]
+			} // W
+        );
+        this._panel.onDidDispose(()=> this._panel = null);
+    }
+
+}
+module.exports = RPCTester;
+/*
 function main(pwd) {
     //загрзка UI
     let ui = new HTMLoader();
@@ -31,3 +79,4 @@ function main(pwd) {
     });
 
 }
+*/
