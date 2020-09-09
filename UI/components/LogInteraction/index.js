@@ -1,4 +1,4 @@
-class LogInteraction extends HTMLDivElement {
+class LogInteraction extends HTMLElement {
     constructor() {
         super();
         let tmpl = document.querySelector("#log-interaction");
@@ -13,4 +13,4 @@ class LogInteraction extends HTMLDivElement {
     }
 }
 
-customElements.define('log-intreaction', LogInteraction);
+customElements.define('log-interaction', LogInteraction);
