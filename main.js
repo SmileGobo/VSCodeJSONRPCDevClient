@@ -1,5 +1,23 @@
 const vscode = require('vscode');
-const URIBuilder = require('./core/URIBuilder');
+const URIBuilder  = require('./core/URIBuilder');
+const HTMLoader   = require('./core/HTMLoader');
+const NodeLocator = require('./core/NodeLocator');
+
+class DOMDocument extends HTMLoader {
+    constructor(){
+        super();
+        this._locator = new NodeLocator();
+    }
+
+    fromString(html_data) {
+        super.fromString(html_data);
+        this._locator.root = super.root;
+    }
+
+    execXPath(query){
+        return this._locator.execXPath(query);
+    }
+}
 class RPCTester {
     _panel = null;
     _uri   = new URIBuilder()
