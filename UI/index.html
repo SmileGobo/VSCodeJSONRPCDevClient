@@ -2,13 +2,22 @@
     <head> 
         <meta charset="UTF-8">
         <!-- Такой схемой мы разрешаем применение стилей-->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource: 'self'; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource: 'self' 'unsafe-inline'; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="import" href="LogInteraction">
         
     </head>
     <body>
         <h1>Suprise! Mother fucker!</h1>
-        <log-interaction />
+        <log-interaction title="Уведомления" id="ntfy"/>
+        <button id= "add">Добавить</button>
+        
+        <script type="module">
+            let log = document.querySelector("#ntfy");
+            let btn = document.querySelector("#add");
+            btn.onclick = (e) => {
+                log.addMessage("AAAA");
+            }
+        </script>
     </body>
 </html>
