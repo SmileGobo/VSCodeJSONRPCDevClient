@@ -21,7 +21,7 @@ class DOMDocument extends HTMLoader {
 class RPCTester {
     _panel = null;
     _uri   = new URIBuilder()
-    _count = 0;
+    _ui    = new DOMDocument();
     activate(context){
         this._uri.basePath = context.extensionPath;
 
@@ -31,20 +31,46 @@ class RPCTester {
         );
         context.subscriptions.push(disposable);
     }
+
     deactivate() {
         this._panel.dispose();
     }
+
     _onActivate() {
         console.log('Plugin activated');
         this._createPanel();
-        this._count++;
-        this._panel.webview.html = `<h1> hello!${this._count}</h1>`;
+        this._loadUI();
+        this._panel.webview.html = this._ui.toString();
+    }
+
+    _loadUI(){
+        if (this._ui.isLoad){
+            return;
+        }
+        this._ui.fromFile(this._uri.make('UI/index.html'));
+        let html = this._ui.root;
+        let body = this._ui.execXPath('//html:body')[0];
+        let head = this._ui.execXPath('//html:head')[0];
+        let tmplt = new DOMDocument();
+        this._ui.execXPath('//html:link[@rel="import"]').forEach(node =>{
+            const cname = node.getAttribute('href');
+            this._uri.schema = 'vscode-resource';
+            //заимпортить скрипт
+            let script = html.createElement('script');
+            script.setAttribute('type', 'module');
+            script.setAttribute('src', this._uri.make(`UI/components/${cname}/index.js`));
+            head.appendChild(script);
+            
+            //заимпортить шаблон
+            this._uri.schema = '';
+            tmplt.fromFile(this._uri.make(`UI/components/${cname}/template.html`));
+            body.appendChild(tmplt.root);
+        });
     }
 
     _createPanel(){
-        //надо корректно очищать панель
         if (!Object.is(this._panel, null)){
-            this._panel.dispose();
+            this._panel.dispose(); //освобождаем панель и пересоздаем
         }
         // но при повторном вызове надо как-то туже панель использовать?
         this._panel = vscode.window.createWebviewPanel(
