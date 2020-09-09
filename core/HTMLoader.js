@@ -1,5 +1,6 @@
 const XMLDOM = require('xmldom');
 const FS     = require('fs');
+const ASS    = require('assert');
 
 module.exports = class {
     _parser = new XMLDOM.DOMParser({
@@ -12,11 +13,21 @@ module.exports = class {
     }
 
     fromFile(path){
-        let html_data = FS.readFileSync(path);
-        this.fromString(html_str);
+        let html_data = FS.readFileSync(path, 'utf-8');
+        this.fromString(html_data);
     }
 
     get root(){
         return this._root;
+    }
+
+    get isLoad() {
+        return !Object.is(this._root, null);
+    }
+
+    toString(){
+        ASS.notEqual(this.isLoad, false, 'data not loaded');
+        let srlzr = new XMLDOM.XMLSerializer();
+        return srlzr.serializeToString(this._root);
     }
 }
