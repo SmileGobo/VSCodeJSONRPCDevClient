@@ -28,7 +28,7 @@ module.exports = class {
     /**
      * запросы xpath от корня жрет запросы вида //ns:tagname
      * @note namespace можно установить
-     * @param {*} query 
+     * @param {string} query 
      */
     execXPath(query) {
         return this._select(query, this._root);
