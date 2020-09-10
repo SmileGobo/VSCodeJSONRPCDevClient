@@ -1,29 +1,53 @@
 <template id="connection-config">
-    <h2></h2>
-    <form style="width: 30vw;">
-    <label>  
-    протокол
-    <select disabled="" name="proto">
-        <option selected="">TCP</option>
-        <option>WS</option>
-    </select>
-    
-    </label>
-    <label>
-        хост
-        <input type="text" name="host" value="127.0.0.1">
-    </label>
-    <label>
-        порт
-        <input type="number" name="port" value="35035">
-    </label>
-    <label id="session" hidden="">
-        сессия(для TCP)
-        <input type="number" name="session" value="0">
-    </label>
-    <input name="submit" type="button" value="connect" style="
-    display: inline-block;
-    width: 45vw;
-    ">
+    <style>
+        label {
+            display:inline-block;
+            margin: 0.3em
+        }
+        .centred {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form {
+            border: 1px dotted dodgerblue;
+            padding: 0.5em;
+            min-width: 90vw;
+            border-radius: 0.7em;
+        }
+        h2 {
+            text-decoration: underline;
+            margin-right: 1em;
+            display:inline
+        }
+    </style>
+
+
+    <form>
+    <div>
+        <h2></h2>
+        <input name="submit" type="button" value="connect">
+    </div>
+    <div class="centred">
+        <label>  
+        протокол
+            <select name="proto">
+                <option selected="">TCP</option>
+                <option>WS</option>
+            </select>
+        </label>
+        <label id="session">
+            сессия(для TCP)
+            <input type="number" name="session" value="0" style="width: 3em;">
+        </label>
+        <label>
+            хост
+            <input type="text" name="host" value="127.0.0.1" style="width:7em">
+        </label>
+        <label>
+            порт
+            <input type="number" name="port" value="35035" style="width:7em;">
+        </label>
+    </div>
     </form>
 </template>
