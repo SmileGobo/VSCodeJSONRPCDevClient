@@ -38,15 +38,20 @@ class RPCTester {
 
     _onActivate() {
         console.log('Plugin activated');
-        this._createPanel();
-        this._loadUI();
-        this._panel.webview.html = this._ui.toString();
+        try {
+            this._createPanel();
+            this._loadUI();
+            this._panel.webview.html = this._ui.toString();
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 
     _loadUI(){
-        if (this._ui.isLoad){
-            return;
-        }
+        //if (this._ui.isLoad){
+        //    return;
+        //}
         this._ui.fromFile(this._uri.make('UI/index.html'));
         let html = this._ui.root;
         let body = this._ui.execXPath('//html:body')[0];
