@@ -36,4 +36,4 @@ class LogInteraction extends HTMLElement {
     }
 }
 
-customElements.define('log-interaction', LogInteraction);
+customElements.define('rpc-log', LogInteraction);

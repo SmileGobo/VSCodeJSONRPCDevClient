@@ -4,12 +4,12 @@
         <!-- Такой схемой мы разрешаем применение стилей-->
         <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource: 'self' 'unsafe-inline'; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="import" href="LogInteraction">
-        <link rel="import" href="ConnectionConfig">
+        <link rel="import" href="RPCLog">
+        <link rel="import" href="RPCConnection">
     </head>
     <body>
-        <connection-config title="Настройки соединения" id="cfg" />
-        <log-interaction title="Уведомления" id="ntfy"/>
+        <rpc-connection title="Настройки соединения" id="cfg" />
+        <rpc-log title="Уведомления" id="ntfy"/>
         <button id= "add">Добавить</button>
         
         <script type="module">

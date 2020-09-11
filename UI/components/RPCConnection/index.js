@@ -70,7 +70,7 @@ class SelectHelper{
     
 
 }
-customElements.define('connection-config', class LogInteraction extends HTMLElement {
+customElements.define('rpc-connection', class LogInteraction extends HTMLElement {
     TEMPLATE_ID = '#connection-config';
     constructor() {
         super();
