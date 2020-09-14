@@ -1,0 +1,77 @@
+<template id="request-list">
+    <style>
+        .main-box {
+            overflow-y: auto;
+            height: 10em;
+        }
+        thead th {
+            position: sticky;
+            top: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th,td {
+            padding: .3em;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: rgb(94, 84, 84);
+        }
+    </style>
+    <div class="main-box">
+        <table>
+          <thead>
+            <tr>
+              <th width="1px">#</th>
+              <th>Метод</th>
+              <th>Параметры</th>
+              <th width="1px">
+                <input type="checkbox">
+              </th>
+              <th width="1px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>Sample.Calc.Add</td>
+              <td>[1, 12]</td>
+              <td>
+                <input type="checkbox">
+              </td>
+              <td><input type="button" value='->'></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Sample.Calc.Mul</td>
+              <td>[2.2, 0.12123]</td>
+              <td>
+                <input type="checkbox">
+              </td>
+              <td><input type="button" value='->'></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sample.Notify.subscribe</td>
+              <td>["time"]</td>
+              <td>
+                <input type="checkbox">
+              </td>
+              <td><input type="button" value='->'></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Sample.Notify.unsubscribe</td>
+              <td>["time"]</td>
+              <td>
+                <input type="checkbox">
+              </td>
+              <td><button>-></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</template>
