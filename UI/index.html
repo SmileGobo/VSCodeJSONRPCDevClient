@@ -7,6 +7,7 @@
         <link rel="import" href="RPCLog">
         <link rel="import" href="RPCConnection">
         <link rel="import" href="RPCRequestList">
+        <link rel="import" href="RPCRequestItem">
     </head>
     <body>
         <rpc-connection title="Настройки соединения" id="cfg" />
@@ -15,10 +16,11 @@
         <button id= "add">Добавить</button>
         
         <script type="module">
-            let log = document.querySelector("#ntfy");
+            
             let btn = document.querySelector("#add");
+            let rqst_list = document.querySelector('rpc-requestlist') 
             btn.onclick = (e) => {
-                log.addMessage("AAAA");
+                rqst_list.addItem({method: 'Sample.Test.Hello', params:['Hello! mother fucker!']});
             }
         </script>
     </body>
