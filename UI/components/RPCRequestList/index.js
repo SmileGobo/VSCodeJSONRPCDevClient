@@ -34,7 +34,7 @@ class RequestList extends HTMLElement {
     CHILD_NAME  = 'rpc-request';
     constructor() {
         super();
-        this._records = [];
+        this._rows = [];
     }
     connectedCallback() {
         let shadow = this.attachShadow({mode: 'open'});
@@ -53,12 +53,27 @@ class RequestList extends HTMLElement {
         shadow.appendChild(tmpl.content.cloneNode(true));
     }
 
+    resetItem(index, value){
+        if (index >= this._rows.length){
+            throw RangeError('invalid index');
+        }
+        let row = this._rows[index];
+        //с пустой строкой можем огрести, да и хер бы с ней
+        if (value.method) {
+            row.method = value.method;
+        }
+
+        if (value.params) {
+            row.params = value.params;
+        }
+    }
+        
     addItem(value){
         let row = new RequestItem(this._widjet.insertRow());
-        row.num    = this._records.length;
+        row.num    = this._rows.length;
         row.method = value.method;
         row.params = value.params;
-        this._records.push(value);
+        this._rows.push(row);
         row.onSend = this._onSend.bind(this, value);
     }
 

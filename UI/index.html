@@ -22,6 +22,10 @@
             btn.onclick = (e) => {
                 rqst_list.addItem({method: 'Sample.Test.Hello', params:['Hello! mother fucker!']});
             }
+            window.addEventListener('message', event => {
+                const message = event.data; // The JSON data our extension sent
+                rqst_list.addItem(message);
+            });
         </script>
     </body>
 </html>
