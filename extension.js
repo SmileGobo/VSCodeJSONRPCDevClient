@@ -3,10 +3,6 @@
 
 
 const Plugin = require('./main');
-let plugin = new Plugin();
 
 
-module.exports = {
-	activate:   plugin.activate.bind(plugin),
-	deactivate: plugin.deactivate.bind(plugin) 
-}
+module.exports = new Plugin();

@@ -22,7 +22,30 @@ class RPCTester {
     _panel = null;
     _uri   = new URIBuilder()
     _ui    = new DOMDocument();
-    activate(context){
+
+    /**
+     * @brief Возвращает функцию для инициализации
+     * @type {Function}
+     * @note обязательное поле
+     */
+    get activate(){
+        return this.onActivate.bind(this);
+    }
+
+    /**
+     * @brief Возвращает функцию для финализации
+     * @type {Function}
+     * @note обязательное поле
+     */
+    get deactivate() {
+        return this.onDeactivate.bind(this);
+    }
+    
+    /**
+     * @brief метод инициализации плагина
+     * @param {vscode.Context} context 
+     */
+    onActivate(context){
         this._uri.basePath = context.extensionPath;
 
         let disposable = vscode.commands.registerCommand(
@@ -32,7 +55,10 @@ class RPCTester {
         context.subscriptions.push(disposable);
     }
 
-    deactivate() {
+    /**
+     * @brief метод финализации плагина
+     */
+    onDeactivate() {
         this._panel.dispose();
     }
 
