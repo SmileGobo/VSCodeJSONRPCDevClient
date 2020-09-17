@@ -2,7 +2,7 @@
     <head> 
         <meta charset="UTF-8">
         <!-- Такой схемой мы разрешаем применение стилей-->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource:; script-src vscode-resource: 'self' 'unsafe-inline'; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
+        <meta http-equiv="Content-Security-Policy" content="default-src self; img-src vscode-resource:; script-src vscode-resource: 'self' 'unsafe-inline'; style-src vscode-resource: 'self' 'unsafe-inline'; "/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="import" href="RPCLog">
         <link rel="import" href="RPCConnection">
@@ -14,18 +14,16 @@
         <rpc-log title="Уведомления" id="ntfy"/>
         <rpc-requestlist />
         <button id= "add">Добавить</button>
-        
-        <script type="module">
+        <script>
+
             
-            let btn = document.querySelector("#add");
-            let rqst_list = document.querySelector('rpc-requestlist') 
-            btn.onclick = (e) => {
-                rqst_list.addItem({method: 'Sample.Test.Hello', params:['Hello! mother fucker!']});
+            function require(item){
+                window.module = {
+                    exports: 'Suprise! Mother Fucker!'
+                }
+                console.log(`require item${item} `);
+                return {};
             }
-            window.addEventListener('message', event => {
-                const message = event.data; // The JSON data our extension sent
-                rqst_list.addItem(message);
-            });
         </script>
-    </body>
+        <script type="module" src="vscode-resource:/home/evgen/projects/rpctester/UI/main.js"></script>
 </html>
