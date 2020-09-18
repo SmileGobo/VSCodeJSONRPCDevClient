@@ -22,7 +22,9 @@
 		]
 	},
 	"scripts": {
-		"test": "mocha"
+		"test": "mocha",
+		"build": "browserify src/app.js --debug | exorcist UI/app.map.js > UI/app.js",
+		"watch": "watchify src/app.js -o UI/app.js -v"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
