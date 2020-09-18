@@ -4,8 +4,8 @@
 const vscode = require('vscode');
 const URIBuilder  = require('./core/URIBuilder.js');
 const DOMDocument = require('./core/DOMDocument.js');
-const _bus        = require('./core/Bus.js');
-const Bus = require('./core/Bus.js');
+const _bus        = require('./core/Bus/index.js');
+const Bus = require('./core/Bus');
 
 class RPCTester {
     _panel = null;

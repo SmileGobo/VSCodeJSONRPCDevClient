@@ -1,4 +1,4 @@
-const Bus = require('./core/Bus.js');
+const Bus = require('./core/Bus');
 class Application {
     _bus = new Bus('client');
     constructor(){
