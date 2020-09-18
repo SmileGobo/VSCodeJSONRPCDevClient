@@ -1,5 +1,5 @@
 
-class ClientProxy{
+class ClientBus{
     constructor(){
         this._proxy = acquireVsCodeApi() || null;
         if (!this._proxy){
@@ -15,4 +15,4 @@ class ClientProxy{
         this._proxy.postMessage(msg);
     }
 }
-module.exports = ClientProxy;
+module.exports = ClientBus;

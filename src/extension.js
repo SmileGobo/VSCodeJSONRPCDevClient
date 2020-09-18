@@ -4,12 +4,14 @@
 const vscode = require('vscode');
 const URIBuilder  = require('./core/URIBuilder.js');
 const DOMDocument = require('./core/DOMDocument.js');
+const _bus        = require('./core/Bus.js');
+const Bus = require('./core/Bus.js');
 
 class RPCTester {
     _panel = null;
     _uri   = new URIBuilder()
     _ui    = new DOMDocument();
-
+    _bus   = new Bus('backend');
     /**
      * @brief Возвращает функцию для инициализации
      * @type {Function}
@@ -104,6 +106,7 @@ class RPCTester {
 			} // W
         );
         this._panel.onDidDispose(()=> this._panel = null);
+        this._bus.init(this._panel.webview);
     }
 
 
@@ -115,7 +118,7 @@ class RPCTester {
         for (let i=0; i < doc.lineCount; i++) {
             try{
                 let line = JSON.parse(doc.lineAt(i).text);
-                this._panel.webview.postMessage(line);
+                this._bus.post('Request.insert', line);
             }
             catch(e){
                 console.log(e);
