@@ -11,6 +11,7 @@ class RequestItem {
             params: cells[2],
             send:   row.querySelector('input[name=send]')
         };
+        row.scrollIntoView();
     }
 
     set num(val){
