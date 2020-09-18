@@ -8,22 +8,12 @@
         <link rel="import" href="RPCConnection">
         <link rel="import" href="RPCRequestList">
         <link rel="import" href="RPCRequestItem">
+        <script type="module" src="vscode-resource:/home/evgen/projects/rpctester/UI/app.js"></script>
     </head>
     <body>
         <rpc-connection title="Настройки соединения" id="cfg" />
         <rpc-log title="Уведомления" id="ntfy"/>
         <rpc-requestlist />
         <button id= "add">Добавить</button>
-        <script>
-
-            
-            function require(item){
-                window.module = {
-                    exports: 'Suprise! Mother Fucker!'
-                }
-                console.log(`require item${item} `);
-                return {};
-            }
-        </script>
-        <script type="module" src="vscode-resource:/home/evgen/projects/rpctester/UI/main.js"></script>
+        
 </html>

@@ -1,23 +1,10 @@
+// The module 'vscode' contains the VS Code extensibility API
+// Import the module and reference it with the alias vscode in your code below
+
 const vscode = require('vscode');
-const URIBuilder  = require('./core/URIBuilder');
-const HTMLoader   = require('./core/HTMLoader');
-const NodeLocator = require('./core/NodeLocator');
+const URIBuilder  = require('./core/URIBuilder.js');
+const DOMDocument = require('./core/DOMDocument.js');
 
-class DOMDocument extends HTMLoader {
-    constructor(){
-        super();
-        this._locator = new NodeLocator();
-    }
-
-    fromString(html_data) {
-        super.fromString(html_data);
-        this._locator.root = super.root;
-    }
-
-    execXPath(query){
-        return this._locator.execXPath(query);
-    }
-}
 class RPCTester {
     _panel = null;
     _uri   = new URIBuilder()
@@ -137,4 +124,6 @@ class RPCTester {
     }
 
 }
-module.exports = RPCTester;
+
+
+module.exports = new RPCTester();
